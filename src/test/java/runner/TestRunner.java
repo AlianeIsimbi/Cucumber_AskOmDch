@@ -1,21 +1,23 @@
 package runner;
 
-import io.cucumber.junit.*;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
-import static io.cucumber.junit.CucumberOptions.SnippetType.*;
+
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resource/feature",
-        glue = {"steps",
-                "hooks",
-                "custom_type" },
+        glue = {"steps", "hooks"},
         plugin = {
                 "pretty",
-                "html:target/cucumber-report.html"
+                "html:target/cucumber-reports/cucumber.html",
+                "json:target/cucumber-reports/cucumber.json",
+                "junit:target/cucumber-reports/cucumber.xml"
         },
         monochrome = true,
-        snippets = CAMELCASE
-
+        publish = false,
+        dryRun = false,
+        snippets = CucumberOptions.SnippetType.CAMELCASE
 )
 public class TestRunner {
 }
